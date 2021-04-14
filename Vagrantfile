@@ -19,8 +19,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network "private_network", ip: "192.168.121.100"
   end
 
-  config.ssh.forward_agent = true
-
   config.vm.define :grafana do |node|
     node.vm.hostname = 'grafana'
   end
