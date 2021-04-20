@@ -89,24 +89,22 @@ receive web requests."`
 
 Prometheus runs on TCP port 9090, and the `-p 9090:9090` option means "expose port 9090 from the container to my VM."
 
-Next figure out VM IP. Should be hard-coded in the Vagrantfile. Mine
-is 192.168.121.100.
+*Networking notes*: The VM IP address on Linux (with libvirt) is is 192.168.121.100. On macos (with virtualbox), the VM IP is a private IP (10.0.x.x) and the host cannot access that IP directly. Instead, Vagrant forwards TCP ports from the Virtualbox VM to the host on 127.0.0.1.
 
-To test that this is working, `curl` should print some small HTML on port 9090:
+To test that this is working, `curl` should print some small HTML on port 9090.
 
-```
-curl 192.168.121.100:9090
-```
+* On Linux host, connect to the VM's IP: `curl 192.168.121.100:9090`
+* On macos host, connect to the forwarded port: `curl 127.0.0.1:9090`
 
-If curl says `Connection refused`, the container is not running.
+If curl says `Connection refused`, the container is not running or there is another network problem.
 
 ```
-curl: (7) Failed to connect to 192.168.121.100 port 9090: Connection refused
+curl: (7) Failed to connect to 127.0.0.1 port 9090: Connection refused
 ```
 
-Open http://192.168.121.100:9090/graph in the browser. Prometheus has a simple web UI shown here.
+Open http://127.0.0.1:9090/graph in the browser. Prometheus has a simple web UI shown here.
 
-Prometheus exposes metrics about itself: http://192.168.121.100:9090/metrics,
+Prometheus exposes metrics about itself: http://127.0.0.1:9090/metrics,
 so you can use Prometheus to monitor Prometheus (inception-style). 
 
 Prometheus "exports" data about itself. But in a real environment Prometheus
@@ -125,12 +123,11 @@ podman run -d -p 3000:3000 --name grafana docker.io/grafana/grafana:6.5.0
 This is really similar to the Prometheus example, except there is no
 configuration file in `/etc`.
 
-To test that this is working, `curl` should print some small HTML on port 3000:
+To test that this is working, `curl` should print some small HTML on port 3000.
 
-```
-curl 192.168.121.100:3000
-```
+* On Linux host, connect to the VM's IP: `curl 192.168.121.100:3000`
+* On macos host, connect to the forwarded port: `curl 127.0.0.1:3000`
 
-You can open http://192.168.121.100:3000 in a browser. The default Grafana login is "admin/admin".
+You can open http://127.0.0.1:3000 in a browser. The default Grafana login is "admin/admin".
 
 Click "Add Data Source" -> "Prometheus"
