@@ -12,6 +12,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.ssh.forward_agent = true
 
+  config.vm.provider :virtualbox do |virt|
+    virt.memory = 4096
+    virt.cpus = 2
+    config.vm.network "private_network", ip: "192.168.121.100"
+  end
+
   config.vm.provider :libvirt do |virt|
     virt.memory = 4096
     virt.cpus = 2
