@@ -18,6 +18,13 @@ Destroy the VM (to wipe everything and start over):
 vagrant destroy
 ```
 
+Have you changed something in `Vagrantfile` after you've run `vagrant up`? Use
+this to apply your new settings (and reboot the VM):
+
+```
+vagrant reload
+```
+
 ## Prerequisites
 
 On the Vagrant VM, we will run Grafana and Prometheus in containers. To run those container images, we need to install podman. (Vim is just nice to have.)
