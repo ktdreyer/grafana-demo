@@ -63,7 +63,7 @@ scrape_configs:
 
 Save and quit Vim.
 
-Lastly, we can run Prometheus like so. Use the unprivileged "vagrant" user account (no sudo).
+Lastly, we can run Prometheus like so. Use the unprivileged "vagrant" user account (no sudo):
 
 ```
 podman run \
