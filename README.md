@@ -84,7 +84,13 @@ podman run \
 This command will pull the latest Prometheus image down from Docker Hub
 ("docker.io") and run it.
 
-If podman worked, the last log message should be `msg="Server is ready to
+You can view the logs with `podman logs`:
+
+```
+podman logs prometheus
+```
+
+If everything worked, the last log message should be `msg="Server is ready to
 receive web requests."`
 
 Prometheus runs on TCP port 9090, and the `-p 9090:9090` option means "expose port 9090 from the container to my VM."
