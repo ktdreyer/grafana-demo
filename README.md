@@ -68,6 +68,7 @@ Lastly, we can run Prometheus like so. Use the unprivileged "vagrant" user accou
 ```
 podman run \
     -p 9090:9090 \
+    --detach=true \
     -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
     docker.io/prom/prometheus:latest
 ```
