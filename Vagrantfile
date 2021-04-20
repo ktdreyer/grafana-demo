@@ -1,8 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# use virtualbox on macos:
-ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+require 'rbconfig'
+
+# Default provider is VirtualBox on macos.
+# Default to libvirt on Linux.
+if RbConfig::CONFIG['host_os'] =~ /linux/
+  ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+end
 
 VAGRANTFILE_API_VERSION = "2"
 
