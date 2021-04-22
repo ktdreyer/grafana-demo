@@ -74,7 +74,7 @@ Lastly, we can run Prometheus like so. Use the unprivileged "vagrant" user accou
 
 ```
 podman run \
-    -p 9090:9090 \
+    --net=host \
     --detach=true \
     --name prometheus \
     -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
@@ -93,7 +93,7 @@ podman logs prometheus
 If everything worked, the last log message should be `msg="Server is ready to
 receive web requests."`
 
-Prometheus runs on TCP port 9090, and the `-p 9090:9090` option means "expose port 9090 from the container to my VM."
+Prometheus runs on TCP port 9090, and the `--net=host` option means "expose this container's network to my VM".
 
 *Networking notes*: The VM IP address on Linux (with libvirt) is is 192.168.121.100. On macos (with virtualbox), the VM IP is a private IP (10.0.x.x) and the host cannot access that IP directly. Instead, Vagrant forwards TCP ports from the Virtualbox VM to the host on 127.0.0.1.
 
@@ -123,7 +123,7 @@ or database servers (Postgres), etc.
 To download and run Grafana from Docker Hub:
 
 ```
-podman run -d -p 3000:3000 --name grafana docker.io/grafana/grafana:6.5.0
+podman run -d --net=host --name grafana docker.io/grafana/grafana:6.5.0
 ```
 
 This is really similar to the Prometheus example, except there is no
