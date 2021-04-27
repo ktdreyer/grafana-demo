@@ -136,4 +136,10 @@ To test that this is working, `curl` should print some small HTML on port 3000.
 
 You can open http://127.0.0.1:3000 in a browser. The default Grafana login is "admin/admin".
 
+## Connecting Grafana to Prometheus
+
 Click "Add Data Source" -> "Prometheus"
+
+Under the "HTTP" section, the "URL" should be `http://localhost:9090`
+
+Click the green "Save & Test" button. You should see a green "Data source is working" box.
